@@ -1,0 +1,7 @@
+/* src/components/TodoList.css */
+.todo-list {
+    list-style: none;
+    padding: 0;
+    margin-top: 10px;
+  }
+  
