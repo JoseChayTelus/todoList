@@ -2,6 +2,7 @@
 import { initializeApp } from "firebase/app";
 import { getDatabase } from "firebase/database";
 import { getAnalytics } from "firebase/analytics";
+import { getAuth } from "firebase/auth";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -23,5 +24,6 @@ const analytics = getAnalytics(app);
 
 // Initialize Realtime Database
 const database = getDatabase(app);
+const auth = getAuth(app);
 
-export { database };
+export { database, auth };

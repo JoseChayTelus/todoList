@@ -14,7 +14,7 @@
     font-size: 1em;
   }
   
-  button {
+  .addItem {
     padding: 10px 15px;
     border: none;
     background-color: #28a745;

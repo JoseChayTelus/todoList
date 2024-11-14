@@ -11,7 +11,7 @@ function TodoInput({ newTodo, setNewTodo, addTodo }) {
         onChange={(e) => setNewTodo(e.target.value)}
         placeholder="Add a new task"
       />
-      <button onClick={addTodo}>Add</button>
+      <button className='addItem' onClick={addTodo}>Add</button>
     </div>
   );
 }

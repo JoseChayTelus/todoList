@@ -1,0 +1,45 @@
+/* src/views/Auth.css */
+.Auth {
+    max-width: 400px;
+    margin: 50px auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+  }
+  
+  .Auth h2 {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .Auth input {
+    width: 100%;
+    padding: 10px;
+    margin: 8px 0;
+    box-sizing: border-box;
+  }
+  
+  .Auth button {
+    width: 100%;
+    padding: 10px;
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .Auth button:hover {
+    background-color: #45a049;
+  }
+  
+  .Auth .error {
+    color: red;
+    text-align: center;
+  }
+  
+  .Auth p {
+    text-align: center;
+    margin-top: 10px;
+  }
+  

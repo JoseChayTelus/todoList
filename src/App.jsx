@@ -1,63 +1,39 @@
 // src/App.jsx
-import React, { useEffect, useState } from 'react';
-import { database } from './firebase';
-import { ref, set, onValue, remove, update } from "firebase/database";
+import React from 'react';
+import { Routes, Route, Navigate } from 'react-router-dom';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import { auth } from './firebase';
 
-import TodoInput from './components/input/TodoInput';
-import TodoList from './components/list/TodoList';
-import './App.css';
+import Home from './views/home/Home';
+import Login from './views/login/login';
+import SignUp from './views/singup/singup';
+import ProtectedRoute from './ProtectedRoute';
 
 function App() {
-  const [todos, setTodos] = useState([]);
-  const [newTodo, setNewTodo] = useState('');
+  const [user, loading, error] = useAuthState(auth);
 
-  // Reference to the 'ToDos' path in the database
-  const todosRef = ref(database, 'todos/');
-
-  // Get all the ToDos in real-time
-  useEffect(() => {
-    onValue(todosRef, (snapshot) => {
-      const data = snapshot.val();
-      const todosList = [];
-      for (let id in data) {
-        todosList.push({ id, ...data[id] });
-      }
-      setTodos(todosList);
-    });
-  }, []);
-
-  // Add a new ToDo
-  const addTodo = () => {
-    if (newTodo.trim() === '') return;
-    const newTodoRef = ref(database, `todos/${Date.now()}`);
-    set(newTodoRef, {
-      title: newTodo,
-      completed: false,
-      createdAt: new Date().toISOString(),
-    });
-    setNewTodo('');
-  };
-
-  // completed Toggle
-  const toggleComplete = (id, currentStatus) => {
-    const todoRef = ref(database, `todos/${id}/completed`);
-    update(todoRef, { completed: !currentStatus });
-  };
-
-  // Delete ToDo
-  const deleteTodo = (id) => {
-    const todoRef = ref(database, `todos/${id}`);
-    remove(todoRef);
-  };
+  if (loading) {
+    return <div>Cargando...</div>;
+  }
 
   return (
-    <div className="App">
-      <h1>Todo List</h1>
-      <TodoInput newTodo={newTodo} setNewTodo={setNewTodo} addTodo={addTodo} />
-      <TodoList todos={todos} toggleComplete={toggleComplete} deleteTodo={deleteTodo} />
-    </div>
+    <Routes>
+      <Route
+        path="/"
+        element={
+          <ProtectedRoute>
+            <Home />
+          </ProtectedRoute>
+        }
+      />
+      <Route path="/login" element={!user ? <Login /> : <Navigate to="/" />} />
+      <Route path="/signup" element={!user ? <SignUp /> : <Navigate to="/" />} />
+      {/* Ruta por defecto */}
+      <Route path="*" element={<Navigate to="/" />} />
+    </Routes>
   );
 }
 
 export default App;
+
 
