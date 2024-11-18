@@ -1,6 +1,6 @@
 // src/components/list.jsx
 import React from 'react';
-import TodoItem from '../item/TodoItem';
+import TodoItem from '../todoItem/TodoItem';
 import './list.css';
 
 function TodoList({ todos, toggleComplete, deleteTodo }) {

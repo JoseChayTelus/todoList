@@ -13,7 +13,7 @@ function App() {
   const [user, loading, error] = useAuthState(auth);
 
   if (loading) {
-    return <div>Cargando...</div>;
+    return <div>Loading...</div>;
   }
 
   return (
@@ -28,7 +28,7 @@ function App() {
       />
       <Route path="/login" element={!user ? <Login /> : <Navigate to="/" />} />
       <Route path="/signup" element={!user ? <SignUp /> : <Navigate to="/" />} />
-      {/* Ruta por defecto */}
+      {/* Default Route */}
       <Route path="*" element={<Navigate to="/" />} />
     </Routes>
   );
